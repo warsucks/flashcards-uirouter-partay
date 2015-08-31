@@ -38,6 +38,16 @@ app.use(function (req, res, next) {
 	next();
 });
 
+app.get('/cards/:id', function (req, res, next) {
+    console.log("id", req.params.id);
+    FlashCardModel.findById(req.params.id).exec()
+    .then(function (foundCard) {
+        console.log("found card");
+        res.json(foundCard);
+    })
+    .then(null, next);
+});
+
 app.get('/cards', function (req, res) {
 
     var modelParams = {};
@@ -80,4 +90,23 @@ app.put('/cards/:id', function (req, res, next) {
         res.json(updatedCard);
     })
     .then(null, next);
+});
+
+app.delete('/cards/:id', function(req, res, next)
+{
+  console.log("route id:",req.params.id);
+  // FlashCardModel.findById(req.params.id).exec()
+  // .then(function (foundCard) {
+  //   console.log("found card",foundCard)
+  //     foundCard.remove();
+  //     res.json(foundCard);
+  // })
+  // .then(null, next);
+
+  FlashCardModel.findByIdAndRemove(req.params.id).exec()
+  .then(function (foundCard) {
+    console.log("deleted card",foundCard)
+      res.json(foundCard);
+  })
+  .then(null, next);
 });

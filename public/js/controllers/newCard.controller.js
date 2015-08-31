@@ -1,5 +1,7 @@
 app.controller('NewCardController', function ($scope, FlashCardsFactory, $rootScope) {
+
 	$scope.categories = FlashCardsFactory.categories;
+
 	function resetCard () {
 		$scope.newCard = {
 		    question: null,

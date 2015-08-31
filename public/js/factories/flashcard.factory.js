@@ -7,6 +7,25 @@ app.factory('FlashCardsFactory', function ($http, currentFlashCards) {
     'Node'
   ];
 
+  function getFlashCardById(id)
+  {
+      return $http.get('/cards/'+id).
+      then(function(response)
+      {
+        return response.data;
+      });
+  }
+
+  function deleteFlashCardById(id)
+  {
+    console.log("factory card id:", id);
+    return $http.delete('/cards/'+id).
+    then(function(response)
+    {
+      return response.data;
+    });
+  }
+
   function getFlashCards (category) {
     var config = {};
     if (category) config.params = { category: category };
@@ -43,6 +62,8 @@ app.factory('FlashCardsFactory', function ($http, currentFlashCards) {
   }
   return {
     getFlashCards: getFlashCards,
+    getFlashCardById: getFlashCardById,
+    deleteFlashCardById: deleteFlashCardById,
     createCard: createFlashCard,
     updateCard: updateFlashCard,
     categories: categories

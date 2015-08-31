@@ -10,15 +10,33 @@ app.config(function($stateProvider)
     }
   });
 
+  $stateProvider.state('manageCard',
+  {
+    url: '/manage-cards/:id',
+    templateUrl: '/js/states/editForm.html',
+    controller: "EditCardController"
+  })
+  .state('manageCard.deleteCard',
+  {
+    url: '/delete-card/',
+    templateUrl: '/js/states/deletePrompt.html',
+    //controlle
+  });
+
   $stateProvider.state('newCard',
   {
-    url: '/newCard',
+    url: '/new-card',
     templateUrl: '/js/states/newCardForm.html',
-    controller: function($scope)
-    {
-      console.log("inside new card state");
-    }
+    controller: "NewCardController"
   });
+
+
+  // $stateProvider.state('editCard',
+  // {
+  //   url: '/edit-card/:id',
+  //   templateUrl: '/js/states/editForm.html',
+  //   controller: "EditCardController"
+  // });
 
   $stateProvider.state('stats',
   {
@@ -28,7 +46,6 @@ app.config(function($stateProvider)
         $scope.scores = ScoreFactory.scores;
     }
   });
-
   // $stateProvider.state('flashcard',
   // {
   //   url: '/flashcards',
